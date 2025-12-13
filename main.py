@@ -34,3 +34,10 @@ def add_movie(params: dict[str, Any]):
     if movie.save():
         return JSONResponse(content={ "message": "Movie added successfully" })
     return JSONResponse(content={ "error": "err" })
+
+@app.put("/movies/{id}")
+def update_movie(id: int, params: dict[str, Any]):
+    query = Movie.update(title=params['title'], year=params['year'], actors=params['actors']).where(Movie.id == id)
+    if query.execute():
+        return JSONResponse(content={ "message": "Movie updated successfully" })
+    return JSONResponse(content={ "error": "err" })
