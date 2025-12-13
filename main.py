@@ -28,6 +28,14 @@ def list_movies(request: Request):
         movie_list.append(movie.to_json())
     return JSONResponse(content={ "movies": movie_list })
 
+@app.get("/movies/{id}")
+def get_movie(id: int):
+    movie = Movie.get(Movie.id == id)
+    if movie:
+        return JSONResponse(content={ "movie": movie.to_json() })
+    return JSONResponse(content={ "error": "err" })
+
+
 @app.post("/movies")
 def add_movie(params: dict[str, Any]):
     movie = Movie(title=params['title'], year=params['year'], actors=params['actors'])
