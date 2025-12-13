@@ -49,3 +49,10 @@ def update_movie(id: int, params: dict[str, Any]):
     if query.execute():
         return JSONResponse(content={ "message": "Movie updated successfully" })
     return JSONResponse(content={ "error": "err" })
+
+@app.delete("/movies/{id}")
+def delete_movie(id: int):
+    movie = Movie.get(Movie.id == id)
+    if movie.delete_instance():
+        return JSONResponse(content={ "message": "Movie deleted successfully" })
+    return JSONResponse(content={ "error": "err" })
