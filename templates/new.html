@@ -14,23 +14,32 @@
       </div>
     </header>
     <main>
-      <div class="row">
-        <div class="container add-movie">
-          <form id="add-movie-form" name="add-movie-form">
-            <label for="title">Title</label>
-            <input type="text" name="title" />
+      <div class="container">
+        <div class="row">
+          <h1>
+            Add a new movie
+          </h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="container add-movie">
+            <form id="add-movie-form" name="add-movie-form" action="/movies" method="POST">
+              <label for="title">Title</label>
+              <input type="text" name="title" />
 
-            <label for="year">Year</label>
-            <input type="text" name="year" />
+              <label for="year">Year</label>
+              <input type="text" name="year" />
 
-            <label for="actors">Actors</label>
-            <input type="text" name="actors" />
+              <label for="actors">Actors</label>
+              <input type="text" name="actors" />
 
-            <button type="submit">
-              <i class="fa-solid fa-file-circle-plus"></i>
-              Add
-            </button>
-          </form>
+              <button type="submit">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                Add
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </main>

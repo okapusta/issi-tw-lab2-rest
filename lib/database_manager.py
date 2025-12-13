@@ -13,3 +13,8 @@ class DatabaseManager():
       movies.append(self.dataclass(id=row[0], title=row[1], year=row[2], actors=row[3]))
 
     return movies
+
+  def create_movie(self, movie):
+    self.cursor.execute(f'INSERT INTO movies (title, year, actors) VALUES ("{movie.title}", "{movie.year}", "{movie.actors}")')
+
+    self.db.commit()

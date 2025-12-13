@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request
 from models import Movie
 from lib.database_manager import DatabaseManager
 
@@ -12,7 +12,24 @@ def home():
 def new_movie():
     return render_template("new.html")
 
+@app.route("/movies", methods=['POST'])
+def create_movie():
+    movie = Movie(
+        title=request.form.get('title'),
+        year=request.form.get('year'),
+        actors=request.form.get('actors')
+    )
+    if movie.valid():
+        __create_movie(movie)
+        return redirect("/")
+    else:
+        pass
+
 def __fetch_movies():
     manager = DatabaseManager(dataclass=Movie)
-    movies = manager.list_movies()
-    return movies
+    return manager.list_movies()
+
+def __create_movie(movie):
+    manager = DatabaseManager(dataclass=Movie)
+    manager.create_movie(movie)
+
