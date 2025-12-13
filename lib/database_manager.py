@@ -16,5 +16,8 @@ class DatabaseManager():
 
   def create_movie(self, movie):
     self.cursor.execute(f'INSERT INTO movies (title, year, actors) VALUES ("{movie.title}", "{movie.year}", "{movie.actors}")')
+    self.db.commit()
 
+  def destroy_movies(self, ids_to_remove):
+    self.cursor.execute(f'DELETE FROM movies WHERE id IN (?)', ids_to_remove)
     self.db.commit()

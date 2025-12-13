@@ -19,25 +19,27 @@
         <div class="row">
           <div class="row">
             <div class="container movie-list-container">
-              <ul id="movie-list">
-                {% for movie in movies %}
-                  <li>
-                    <input type='checkbox' data-id='{{ movie.id }}'> {{ movie.title }}, {{ movie.year }}, {{ movie.actors }}
-                  </li>
-                {% endfor %}
-              </ul>
-              <row>
-                <a href="/movies/new">
-                  <button>
-                    <i class="fa-solid fa-file-circle-plus"></i>
-                    Add new movie
+              <form action="/movies-destroy" name="delete-movies" method="POST">
+                <ul id="movie-list">
+                  {% for movie in movies %}
+                    <li>
+                      <input type='checkbox' name="movies-to-remove" value="{{ movie.id }}"> {{ movie.title }}, {{ movie.year }}, {{ movie.actors }}
+                    </li>
+                  {% endfor %}
+                </ul>
+                <row>
+                  <a href="/movies/new">
+                    <button>
+                      <i class="fa-solid fa-file-circle-plus"></i>
+                      Add new movie
+                    </button>
+                  </a>
+                  <button type="submit">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete selected movies
                   </button>
-                </a>
-                <button onClick="javascript:onDeleteMovies()">
-                  <i class="fa-solid fa-trash"></i>
-                  Delete selected movies
-                </button>
-              </row>
+                </row>
+              </form>
             </div>
           </div>
         </div>
