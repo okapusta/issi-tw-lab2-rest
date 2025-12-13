@@ -1,14 +1,12 @@
 from peewee import *
+from .base_model import BaseModel
 
-db = SqliteDatabase('movies.db')
-
-class Movie(Model):
+class Movie(BaseModel):
   title = CharField()
   year = IntegerField()
   actors = CharField()
 
   class Meta:
-    database = db
     table_name = 'movies'
 
   def to_json(self):
@@ -18,5 +16,3 @@ class Movie(Model):
       "year": self.year,
       "actors": self.actors
     }
-
-db.connect()

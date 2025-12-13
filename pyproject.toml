@@ -7,5 +7,6 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.124.4",
     "peewee>=3.18.3",
+    "peewee-migrate>=1.14.3",
     "requests>=2.32.5",
 ]
