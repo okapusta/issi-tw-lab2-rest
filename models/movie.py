@@ -1,12 +1,22 @@
-from dataclasses import dataclass
+from peewee import *
 
-@dataclass
-class Movie():
-  title: str
-  year: int
-  actors: str
+db = SqliteDatabase('movies.db')
 
-  id: int = None
+class Movie(Model):
+  title = CharField()
+  year = IntegerField()
+  actors = CharField()
 
-  def valid(self):
-    return len(self.title) > 0 and self.year and len(self.actors) > 0
+  class Meta:
+    database = db
+    table_name = 'movies'
+
+  def to_json(self):
+    return {
+      "id": self.id,
+      "title": self.title,
+      "year": self.year,
+      "actors": self.actors
+    }
+
+db.connect()
