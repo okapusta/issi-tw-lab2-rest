@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from models import Movie
 from lib.nominatim import Nominatim
+from typing import Any
 
 app = FastAPI()
 
@@ -20,32 +21,16 @@ def sum(lat: float, lon: float):
 
     return JSONResponse(content={ "result": result })
 
-
-@app.route("/movies", methods=['GET'])
+@app.get("/movies")
 def list_movies(request: Request):
     movie_list = []
     for movie in Movie.select():
         movie_list.append(movie.to_json())
     return JSONResponse(content={ "movies": movie_list })
 
-# @app.route("/movies", methods=['POST'])
-# def create_movie():
-#     movie = Movie(
-#         title=request.form.get('title'),
-#         year=request.form.get('year'),
-#         actors=request.form.get('actors')
-#     )
-#     if movie.valid():
-#         manager = DatabaseManager(dataclass=Movie)
-#         manager.create_movie(movie)
-#         return redirect("/")
-#     else:
-#         return redirect('/movies/new')
-
-# @app.route("/movies-destroy", methods=['POST'])
-# def destroy_movie():
-#     movies_to_remove_ids = request.form.getlist('movies-to-remove')
-#     # app.logger.debug('movies to remove', list(movies_to_remove_ids))
-#     manager = DatabaseManager(dataclass=Movie)
-#     manager.destroy_movies(list(movies_to_remove_ids))
-#     return redirect("/")
+@app.post("/movies")
+def add_movie(params: dict[str, Any]):
+    movie = Movie(title=params['title'], year=params['year'], actors=params['actors'])
+    if movie.save():
+        return JSONResponse(content={ "message": "Movie added successfully" })
+    return JSONResponse(content={ "error": "err" })
