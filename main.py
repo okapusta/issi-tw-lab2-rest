@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from app import heathcheck_router, calculator_router, geolocator_router, movie_router
+
+from api import heathcheck_router, calculator_router, geolocator_router, movie_router
 
 app = FastAPI()
 app.include_router(heathcheck_router, tags=["healthcheck"])
