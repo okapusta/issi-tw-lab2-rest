@@ -46,5 +46,5 @@ def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
 
 
 def rollback(migrator: Migrator, database: pw.Database, *, fake=False):
-    migrator.sql("DROP TABLE movie_actors")
+    migrator.sql("DROP TABLE movies_actors_through")
 

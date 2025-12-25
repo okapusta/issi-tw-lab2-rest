@@ -8,4 +8,4 @@ class MovieActor(BaseModel):
   actor_id = ForeignKeyField(Actor)
 
   class Meta:
-    table_name = 'movie_actors'
+    table_name = 'movies_actors_through'
