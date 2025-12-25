@@ -2,15 +2,13 @@ from models import Movie
 from typing import Any
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
+from api.repositories.movie_repository import MovieRepository
 
 movie_router = APIRouter()
 
 @movie_router.get("/movies")
 def list_movies(request: Request):
-    movie_list = []
-    for movie in Movie.select():
-        movie_list.append(movie.to_json())
-    return JSONResponse(content={ "movies": movie_list })
+    return JSONResponse(content={ "movies": MovieRepository.list_movies() })
 
 @movie_router.get("/movies/{id}")
 def get_movie(id: int):
