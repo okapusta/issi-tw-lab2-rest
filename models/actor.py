@@ -6,4 +6,11 @@ class Actor(BaseModel):
   surname = IntegerField()
 
   class Meta:
-    table_name = 'actors'
+    table_name = 'actor'
+
+  def to_json(self):
+    return {
+      "id": self.id,
+      "name": self.name,
+      "surname": self.surname,
+    }
