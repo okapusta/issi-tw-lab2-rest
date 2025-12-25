@@ -1,4 +1,4 @@
-"""Peewee migrations -- 001_actors.py.
+"""Peewee migrations -- 002_movie_actors.py.
 
 Some examples (model - class or model name)::
 
@@ -34,17 +34,17 @@ from contextlib import suppress
 import peewee as pw
 from peewee_migrate import Migrator
 
-from models import Actor
+from models import MovieActor
 
 with suppress(ImportError):
     import playhouse.postgres_ext as pw_pext
 
 
 def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
-    migrator.create_model(Actor)
+    migrator.create_model(MovieActor)
 
 
 
 def rollback(migrator: Migrator, database: pw.Database, *, fake=False):
-    migrator.sql("DROP TABLE actors")
+    migrator.sql("DROP TABLE movies_actors_through")
 

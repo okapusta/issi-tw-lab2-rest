@@ -1,6 +1,6 @@
 from peewee import *
 
-db = SqliteDatabase('movies.db')
+db = SqliteDatabase('movies-extended.db')
 
 class BaseModel(Model):
   class Meta:
