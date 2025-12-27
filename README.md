@@ -15,13 +15,13 @@ A simple FastAPI movie catalog
     ```
 2. Create a movie
     ```
-    curl -X POST  localhost:8000/movies -d '{ "title": "Tester", "year": 1999, "actors": "Testing Actor" }' -H "Content-Type: application/json"
+    curl -X POST  localhost:8000/movies -d '{ "title": "Tester", "year": 1999, "actors": "Testing Actor", "description": "Testing 123", "director": "Tester" }' -H "Content-Type: application/json"
     ```
 3. Update a movie
     ```
-    curl -X PUT localhost:8000/movies/5 -d '{ "title": "Tester", "year": 1999, "actors": "Morgan Freeman" }' -H "Content-Type: application/json"
+    curl -X PUT localhost:8000/movies/6 -d '{ "title": "Tester", "year": 1999, "actors": "Testing Actor", "description": "Testing 123", "director": "Tester" }' -H "Content-Type: application/json"
     ```
 4. Delete a movie
     ```
-     curl -X DELETE localhost:8000/movies/5
+     curl -X DELETE localhost:8000/movies/6
     ```

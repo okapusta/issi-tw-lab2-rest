@@ -20,14 +20,14 @@ def get_movie(id: int):
 
 @movie_router.post("/movies")
 def add_movie(params: dict[str, Any]):
-    movie = Movie(title=params['title'], year=params['year'], description=params['description'], director=params['director'])
+    movie = Movie(title=params['title'], year=params['year'], description=params.get['description'], director=params['director'])
     if movie.save():
         return JSONResponse(content={ "message": "Movie added successfully" })
     return JSONResponse(content={ "error": "err" })
 
 @movie_router.put("/movies/{id}")
 def update_movie(id: int, params: dict[str, Any]):
-    query = Movie.update(title=params['title'], year=params['year'], description=params['description'], director=params['director']).where(Movie.id == id)
+    query = Movie.update(title=params['title'], year=params['year'], description=params.get('description'), director=params.get('director')).where(Movie.id == id)
     if query.execute():
         return JSONResponse(content={ "message": "Movie updated successfully" })
     return JSONResponse(content={ "error": "err" })
