@@ -22,7 +22,7 @@ def get_movie(id: int):
 def add_movie(params: dict[str, Any]):
     movie = Movie(title=params['title'], year=params['year'], description=params.get('description'), director=params['director'])
     if movie.save():
-        return JSONResponse(content={ "message": "Movie added successfully" })
+        return JSONResponse(content={ "message": "Movie added successfully", "movie": movie.to_json() })
     return JSONResponse(content={ "error": "err" })
 
 @movie_router.put("/movies/{id}")
