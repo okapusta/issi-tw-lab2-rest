@@ -58,9 +58,10 @@ def test_delete_actor():
 
 def test_assign_actor():
   actor = Actor(name="tester", surname="tester")
+  other_actor = Actor(name="tester", surname="tester")
   actor.save()
   response = client.put(f"/movies/4/actors", json={
-    "actor_ids": [actor.id]
+    "actor_ids": [actor.id, other_actor.id]
   }, headers={
     "Content-Type": "application/json"
   })

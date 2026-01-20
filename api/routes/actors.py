@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
+from models.base_model import db
 from api.repositories import ActorRepository
 from typing import Any
 from models import Movie
@@ -48,9 +49,14 @@ def movie_actors(id: int, params: dict[str, Any]):
     actors = ActorRepository.get_actors(params["actor_ids"])
     if actors is None:
        return JSONResponse(content={ "error": "not found" }, status=404)
-    movie.actors = actors
-    if movie.save():
-       return JSONResponse(content={ "success": True })
+    with db.atomic():
+      movie.actors.clear()
+      success = False
+      for actor in actors:
+         movie.actors.add(actor)
+         success = True
+    if success:
+      return JSONResponse(content={ "success": True })
     return JSONResponse(content={ "error": "invalid" })
 
 @actor_router.get("/movies/{id}/actors")

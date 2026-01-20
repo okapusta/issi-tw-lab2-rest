@@ -31,7 +31,10 @@ class ActorRepository:
 
   @classmethod
   def get_actors(cls, ids: [int]):
-     return Actor.select().where(Actor.id == ids)
+     actor_list = []
+     for actor in Actor.select().where(Actor.id in ids):
+        actor_list.append(actor)
+     return actor_list
 
   @classmethod
   def update_actor(cls, actor: Actor, params: dict[str, Any]):
