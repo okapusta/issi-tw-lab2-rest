@@ -28,8 +28,9 @@ def add_movie(params: dict[str, Any]):
 @movie_router.put("/movies/{id}")
 def update_movie(id: int, params: dict[str, Any]):
     query = Movie.update(title=params['title'], year=params['year'], description=params.get('description'), director=params.get('director')).where(Movie.id == id)
+    movie = Movie.get(Movie.id == id)
     if query.execute():
-        return JSONResponse(content={ "message": "Movie updated successfully" })
+        return JSONResponse(content={ "message": "Movie updated successfully", "movie": movie.to_json() })
     return JSONResponse(content={ "error": "err" })
 
 @movie_router.delete("/movies/{id}")
