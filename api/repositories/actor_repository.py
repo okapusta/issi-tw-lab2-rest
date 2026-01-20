@@ -32,7 +32,7 @@ class ActorRepository:
   @classmethod
   def get_actors(cls, ids: [int]):
      actor_list = []
-     for actor in Actor.select().where(Actor.id in ids):
+     for actor in Actor.select().where(Actor.id << ids):
         actor_list.append(actor)
      return actor_list
 

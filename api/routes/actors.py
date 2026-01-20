@@ -47,6 +47,7 @@ def movie_actors(id: int, params: dict[str, Any]):
     if movie is None:
        return JSONResponse(content={ "error": "not found" }, status=404)
     actors = ActorRepository.get_actors(params["actor_ids"])
+    print("CIPA", actors)
     if actors is None:
        return JSONResponse(content={ "error": "not found" }, status=404)
     with db.atomic():

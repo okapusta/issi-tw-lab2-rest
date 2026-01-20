@@ -60,6 +60,7 @@ def test_assign_actor():
   actor = Actor(name="tester", surname="tester")
   other_actor = Actor(name="tester", surname="tester")
   actor.save()
+  other_actor.save()
   response = client.put(f"/movies/4/actors", json={
     "actor_ids": [actor.id, other_actor.id]
   }, headers={
@@ -67,7 +68,7 @@ def test_assign_actor():
   })
   assert response.status_code == 200
   movie = Movie.get_by_id(4)
-  movie.actors
+  assert len(movie.actors) == 2
 
 def test_movie_actors():
   response = client.get("/movies/4/actors")
