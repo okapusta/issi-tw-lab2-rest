@@ -30,6 +30,10 @@ class ActorRepository:
      return Actor.get_by_id(id)
 
   @classmethod
+  def get_actors(cls, ids: [int]):
+     return Actor.select().where(Actor.id == ids)
+
+  @classmethod
   def update_actor(cls, actor: Actor, params: dict[str, Any]):
     # if actor.update(params):
     #    return actor, True

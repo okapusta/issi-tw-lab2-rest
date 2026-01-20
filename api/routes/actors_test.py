@@ -60,7 +60,7 @@ def test_assign_actor():
   actor = Actor(name="tester", surname="tester")
   actor.save()
   response = client.put(f"/movies/4/actors", json={
-    "actor_id": actor.id
+    "actor_ids": [actor.id]
   }, headers={
     "Content-Type": "application/json"
   })
@@ -73,4 +73,4 @@ def test_movie_actors():
   assert response.status_code == 200
   assert response.json()["actors"]
   actors = response.json()["actors"]
-  assert len(actors) > 1
+  assert len(actors) >= 1

@@ -45,10 +45,11 @@ def movie_actors(id: int, params: dict[str, Any]):
     movie = Movie.get_by_id(id)
     if movie is None:
        return JSONResponse(content={ "error": "not found" }, status=404)
-    actor = ActorRepository.get_actor(params["actor_id"])
-    if actor is None:
+    actors = ActorRepository.get_actors(params["actor_ids"])
+    if actors is None:
        return JSONResponse(content={ "error": "not found" }, status=404)
-    if movie.actors.add(actor):
+    movie.actors = actors
+    if movie.save():
        return JSONResponse(content={ "success": True })
     return JSONResponse(content={ "error": "invalid" })
 
